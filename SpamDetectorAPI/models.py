@@ -3,26 +3,26 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    name = models.CharField(max_length=255)
+    username = models.CharField(max_length=255)
     phone = models.CharField(primary_key=True, max_length=15)
     email = models.EmailField(max_length=255, blank=True, null=True)
     
     def __str__(self) -> str:
-        return self.name
+        return self.username
     
     #Sorting model instances by their names
     class Meta:
-        ordering = ['name']
+        ordering = ['username']
 
 
 
-# class Contacts(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     contact_name = models.CharField(max_length=255)
-#     contact_phone = models.CharField(max_length=15)
+class Contact(models.Model):
+    user = models.ForeignKey(User, related_name='contacts' ,on_delete=models.CASCADE)
+    contact_name = models.CharField(max_length=255)
+    contact_phone = models.CharField(max_length=15)
     
-#     def __str__(self) -> str:
-#         return (f"{self.user__name}: {self.contact_name}")
+    def __str__(self) -> str:
+        return (f"{self.user.username}: {self.contact_name}")
 
 
 

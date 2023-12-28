@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, ContactSerializer, UserContactsSerializer
 
 from rest_framework.views import APIView
 from rest_framework import generics
@@ -56,11 +56,16 @@ from rest_framework import generics
 #                                 CLASS-BASED VIEWS                                          #
 #=============================================================================================
 #Class based views
-class UsersView(generics.ListCreateAPIView):
+class UsersList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-class SingleUserView(generics.RetrieveUpdateDestroyAPIView):
-    querysert = User.objects.all()
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class UserContactsList(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserContactsSerializer
