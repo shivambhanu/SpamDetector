@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import User
+from .models import User, Contact
 from .serializers import UserSerializer, ContactSerializer, UserContactsSerializer
 
 from rest_framework.views import APIView
@@ -64,6 +64,13 @@ class UsersList(generics.ListCreateAPIView):
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class ContactsList(generics.ListCreateAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+    
+    def perform_create(self, serializer):
+        serializer.save(self.request.user)
 
 
 class UserContactsList(generics.RetrieveAPIView):

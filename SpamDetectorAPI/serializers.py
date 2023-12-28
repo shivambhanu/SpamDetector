@@ -9,6 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ContactSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Contact
         fields = ['contact_name', 'contact_phone']
