@@ -9,6 +9,10 @@ class User(models.Model):
     
     def __str__(self) -> str:
         return self.name
+    
+    #Sorting model instances by their names
+    class Meta:
+        ordering = ['name']
 
 
 
