@@ -1,19 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
-class User(models.Model):
-    username = models.CharField(max_length=255)
-    phone = models.CharField(primary_key=True, max_length=15)
-    email = models.EmailField(max_length=255, blank=True, null=True)
-    
-    def __str__(self) -> str:
-        return self.username
-    
-    #Sorting model instances by their names
-    class Meta:
-        ordering = ['username']
-
+class User(AbstractUser):
+    phone = models.CharField(max_length=20)
 
 
 class Contact(models.Model):
