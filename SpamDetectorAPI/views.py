@@ -2,8 +2,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import User, Contact
-from .serializers import UserSerializer, ContactSerializer
+from .models import AppUser, Contact
+from .serializers import AppUserSerializer, ContactSerializer
 
 from rest_framework.views import APIView
 from rest_framework import generics
@@ -84,20 +84,23 @@ from rest_framework.permissions import IsAuthenticated
 #     #     serializer.save(self.request.user)
 
 
-class RegisterUser(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    
+
     
 class ListUsers(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = AppUser.objects.all()
+    serializer_class = AppUserSerializer
+    # permission_classes = [IsAuthenticated]
 
 
-class AddContact(generics.CreateAPIView):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
-    permission_classes = [IsAuthenticated]
+class RegisterUser(generics.CreateAPIView):
+    queryset = AppUser.objects.all()
+    serializer_class = AppUserSerializer
     
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    
+# class AddContact(generics.CreateAPIView):
+#     queryset = Contact.objects.all()
+#     serializer_class = ContactSerializer
+#     permission_classes = [IsAuthenticated]
+    
+#     def perform_create(self, serializer):
+#         serializer.save(user=self.request.user)
