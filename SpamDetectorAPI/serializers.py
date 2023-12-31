@@ -1,17 +1,17 @@
 from rest_framework import serializers
-from .models import AppUser, Contact
+from .models import AppUser
 
 
-class CustomUserSerializer(serializers.ModelSerializer):
+class AppUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppUser
         fields = ['username', 'phone', 'password', 'email']
 
 
-class ContactSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Contact
-        fields = ['contact_name', 'contact_phone']
+# class ContactSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Contact
+#         fields = ['contact_name', 'contact_phone']
 
 
 # # class UserContactsSerializer(serializers.ModelSerializer):
